@@ -1,0 +1,60 @@
+<div class="card">
+  <div class="header">
+    <h1 class="title">Flight Edit</h1>
+  </div>
+
+
+  <div class="alert alert-warning" *ngIf="showWarning" style="margin:20px;">
+
+    <p>
+      You haven't saved your modifications. Do you really want to leave me?
+    </p>
+    <button class="btn btn-primary" (click)="decide(true)">Yes</button>
+    <button class="btn btn-primary" (click)="decide(false)">No</button>
+  </div>
+
+  <div class="content">
+
+    <form [formGroup]="form">
+
+
+      <h2>Dynamic Form</h2>
+
+      <div class="form-group" *ngFor="let item of metaData">
+          <label>{{item.label}}:</label>
+          
+          <input *ngIf="item.type == 'date'" type="date" class="form-control" [formControlName]="item.name">
+          <input *ngIf="item.type !== 'date'" class="form-control" [formControlName]="item.name">          
+      </div>
+          
+
+      <h2>Static Form</h2>
+    <div class="form-group">
+      <label>Id:</label>
+      <input class="form-control" formControlName="id">
+    </div>
+
+    <div class="form-group">
+        <label>From:</label>
+        <input class="form-control" formControlName="from">
+      </div>
+
+      <div class="form-group">
+          <label>To:</label>
+          <input class="form-control" formControlName="to">
+        </div>
+
+        <div class="form-group">
+            <label>Date:</label>
+            <input class="form-control" formControlName="date">
+        </div>
+        <div class="form-group">
+          <button class="btn btn-primary" (click)="save()">Save</button>
+        </div>
+      </form>
+    <p>Id: {{id}}</p>
+    <p>ShowDetails: {{showDetails}}</p>
+    <button (clickWithWarning)="delete()" warning="Are you sure, dude?!">Delete</button>
+  </div>
+</div>
+
